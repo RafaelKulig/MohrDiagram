@@ -44,29 +44,29 @@ def PlotMohrCircle(s_x, s_y, t_xy, avg_stress, radius, principal_points):
     x_circle = avg_stress + radius * np.cos(theta)
     y_circle = radius * np.sin(theta)
 
-    ax.plot(x_circle, y_circle, label='Círculo de Mohr')
+    ax.plot(x_circle, y_circle)
 
     # Estado original
-    ax.plot([s_x, s_y], [t_xy, -t_xy], 'ro--', label='Estado de tensão original')
-    ax.annotate('σx', (s_x, t_xy), textcoords="offset points", xytext=(10,10), ha='center')
-    ax.annotate('σy', (s_y, -t_xy), textcoords="offset points", xytext=(10,-10), ha='center')
+    ax.plot([s_x, s_y], [t_xy, -t_xy], 'ro--')
+    ax.annotate(f'σx({s_x},{t_xy})', (s_x, t_xy), textcoords="offset points", xytext=(10,10), ha='center')
+    ax.annotate(f'σy({s_y},{-t_xy})', (s_y, -t_xy), textcoords="offset points", xytext=(10,-10), ha='center')
 
     # Tensões principais
     for i, (sx, ty) in enumerate(principal_points, start=1):
         ax.plot(sx, ty, 'go')  # ponto verde
-        ax.annotate(f'σ{i}', (sx, ty), textcoords="offset points", xytext=(0,10), ha='center', color='green')
+        ax.annotate(f'σ{i}({sx},{ty})', (sx, ty), textcoords="offset points", xytext=(0,10), ha='center', color='green')
         ax.arrow(avg_stress, 0, sx - avg_stress, ty, head_width=0.2, head_length=0.2, fc='green', ec='green', length_includes_head=True)
 
     # Centro
-    ax.plot(avg_stress, 0, 'kx', label='Centro')
+    ax.plot(avg_stress, 0, 'kx')
     ax.axhline(0, color='black', linewidth=0.8)
     ax.axvline(avg_stress, color='gray', linestyle='--', linewidth=0.8)
 
-    ax.set_xlabel('Tensão normal σ')
-    ax.set_ylabel('Tensão de cisalhamento τ')
+    ax.set_xlabel('Normal Stress σ')
+    ax.set_ylabel('Shear Stress τ')
     ax.legend()
     ax.grid(True)
-    plt.title('Círculo de Mohr com Tensões Principais')
+    plt.title('Mohr Cicle')
     plt.show()
 
 def rad2deg(angle):
