@@ -1,17 +1,31 @@
-import math
+import math, argparse
 import numpy as np
 import matplotlib.pyplot as plt
 def main():
-    while True:
-        print("Insert σx, σy and τxy separated by space: ")
-        stress=input().split()
-        try:
-            s_x = float(stress[0])
-            s_y = float(stress[1])
-            t_xy = float(stress[2])
-            break
-        except ValueError:
-            print("Please, include only float type.")
+    parser=argparse.ArgumentParser(description="Calculate and plot Mohr's Circle.")
+    parser.add_argument('-sx',type=float,help="Normal stress in x direction (σx)")
+    parser.add_argument('-sy',type=float,help="Normal stress in x direction (σy)")
+    parser.add_argument('-txy',type=float,help="Shear stress (τxy)")
+    args=parser.parse_args()
+    
+    if args.sx is not None and args.sy is not None and args.txy is not None:
+        s_x = args.sx
+        s_y = args.sy
+        t_xy = args.txy
+    else:
+        while True:
+            print("Insert σx, σy and τxy separated by space: ")
+            stress=input().split()
+            try:
+                s_x = float(stress[0])
+                s_y = float(stress[1])
+                t_xy = float(stress[2])
+                break
+            except ValueError:
+                print("Please, include only float type.")
+
+
+    
     avg_stress, radius, stress1, stress2, theta_deg, principal_points = calculate_stress(s_x, s_y, t_xy)
     print(f"\nAverage normal stress: {avg_stress:.2f}")
     print(f"Maximum shear stress: {radius:.2f}")
