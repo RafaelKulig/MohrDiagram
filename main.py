@@ -62,10 +62,10 @@ def plot_mohr_circle(s_x: float, s_y: float, t_xy: float, avg_stress: float,
     ax.plot(x_circle, y_circle, label='Mohr Circle', color='blue')
 
     # Estado original
-    ax.plot([s_x, s_y], [t_xy, -t_xy], 'ro--', label='Original State')
-    ax.annotate(f'σx({s_x:.2f}, {t_xy:.2f})', (s_x, t_xy), textcoords="offset points",
+    ax.plot([s_x, s_y], [-t_xy, t_xy], 'ro--', label='Original State')
+    ax.annotate(f'σx({s_x:.2f}, {-t_xy:.2f})', (s_x, -t_xy), textcoords="offset points",
                 xytext=(10, 10), ha='center')
-    ax.annotate(f'σy({s_y:.2f}, {-t_xy:.2f})', (s_y, -t_xy), textcoords="offset points",
+    ax.annotate(f'σy({s_y:.2f}, {t_xy:.2f})', (s_y, t_xy), textcoords="offset points",
                 xytext=(10, -10), ha='center')
 
     # Tensões principais
