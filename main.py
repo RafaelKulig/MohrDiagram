@@ -32,9 +32,18 @@ def main():
     print(f"Principal stresses:\n\tσ1 = {stress1:.2f}\n\tσ2 = {stress2:.2f}")
     print(f"Principal plane angle: {theta_deg:.2f}°\n")
 
-    plot_mohr_circle(s_x, s_y, t_xy, avg_stress, radius, principal_points)
+    plot_mohr_circle(s_x, s_y, t_xy, avg_stress, radius, principal_points) # type: ignore
     
 def calculate_stress(s_x: float, s_y: float, t_xy: float):
+    """ Calculates the average stress, radius, principal stresses, and angle of the principal plane
+    Args:
+        s_x (float): Normal stress in the x direction (σx)
+        s_y (float): Normal stress in the y direction (σy)
+        t_xy (float): Shear stress (τxy)
+    
+    Returns:
+        tuple: Average stress, radius, principal stresses, angle of the principal plane, and principal points
+    """
     avg_stress = (s_x + s_y) / 2
     radius = math.sqrt(((s_x - s_y) / 2)**2 + t_xy**2)
     stress1 = avg_stress + radius
@@ -51,6 +60,19 @@ def calculate_stress(s_x: float, s_y: float, t_xy: float):
 
 def plot_mohr_circle(s_x: float, s_y: float, t_xy: float, avg_stress: float,
                      radius: float, principal_points: list[tuple[float, float]]):
+    """ Plots Mohr's Circle based on the provided stresses.
+
+    Args:
+        s_x (float): Normal stress in the x direction (σx)
+        s_y (float): Normal stress in the y direction (σy)
+        t_xy (float): Shear stress (τxy)
+        avg_stress (float): Average normal stress
+        radius (float): Radius of Mohr's Circle
+        principal_points (list[tuple[float, float]]): List of principal points (σ1, σ2)
+    
+    Returns:
+        None: Displays the Mohr's Circle plot
+    """
 
     fig, ax = plt.subplots()
     ax.set_aspect('equal')
