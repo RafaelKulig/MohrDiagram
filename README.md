@@ -12,7 +12,7 @@ The script supports:
 ## 📦 Requirements
 
 - Python 3.7+
-- Libraries:
+- Libraries: numpy, matplotlib
 
 ```bash
 pip install numpy matplotlib
